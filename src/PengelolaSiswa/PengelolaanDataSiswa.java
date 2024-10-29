@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 /**
  * Kelas utama untuk mengelola data siswa, termasuk menambahkan, menampilkan,
- * dan menghapus data siswa. Data siswa disimpan dalam ArrayList.
+ * mencari, dan menghapus data siswa. Data siswa disimpan dalam ArrayList.
  */
 public class PengelolaanDataSiswa {
 
@@ -37,12 +37,15 @@ public class PengelolaanDataSiswa {
                     hapusSiswa();
                     break;
                 case 4:
+                    cariSiswa();
+                    break;
+                case 5:
                     System.out.println("Keluar dari program.");
                     break;
                 default:
                     System.out.println("Pilihan tidak valid.");
             }
-        } while (pilihan != 4);
+        } while (pilihan != 5);
 
         scanner.close();
     }
@@ -55,7 +58,8 @@ public class PengelolaanDataSiswa {
         System.out.println("1. Tambah Siswa");
         System.out.println("2. Tampilkan Semua Siswa");
         System.out.println("3. Hapus Siswa");
-        System.out.println("4. Keluar");
+        System.out.println("4. Cari Siswa");
+        System.out.println("5. Keluar");
         System.out.print("Pilihan: ");
     }
 
@@ -112,5 +116,24 @@ public class PengelolaanDataSiswa {
         }
 
         System.out.println("Siswa dengan NIS " + nisHapus + " tidak ditemukan.");
+    }
+
+    /**
+     * Mencari data siswa berdasarkan NIS yang dimasukkan oleh pengguna.
+     * Jika NIS ditemukan, informasi siswa akan ditampilkan.
+     * Jika tidak ditemukan, akan menampilkan pesan bahwa siswa tidak ditemukan.
+     */
+    private static void cariSiswa() {
+        System.out.print("Masukkan NIS siswa yang ingin dicari: ");
+        String nisCari = scanner.nextLine();
+
+        for (Siswa siswa : daftarSiswa) {
+            if (siswa.getNis().equals(nisCari)) {
+                System.out.println("Data Siswa Ditemukan: " + siswa);
+                return;
+            }
+        }
+
+        System.out.println("Siswa dengan NIS " + nisCari + " tidak ditemukan.");
     }
 }
